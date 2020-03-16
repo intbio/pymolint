@@ -1,4 +1,4 @@
-import numpy as np                                                                                                               import scipy.spatial as ss                                                                                                       from itertools import combinations
+import numpy as np 
 from itertools import permutations
 from base import *
 
