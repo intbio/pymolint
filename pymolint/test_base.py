@@ -1,6 +1,6 @@
 import numpy as np 
 from itertools import permutations
-from base import *
+from pymolint.base import *
 
 
 def test_base():
