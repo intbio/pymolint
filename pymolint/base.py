@@ -75,7 +75,6 @@ def find_contacts(A_coordinates,A_indices,B_coordinates,B_indices,d_threshold=3.
 
 	return contact_list
 
-
 def bonded_1_4(bonding_set):
 	"""This function builds a bonding set upto 1-4 neighbours (inclusive)
 	Parameters
@@ -184,7 +183,7 @@ def find_hbonds(A_heavy_coord,A_heavy_indices,A_hydr_coord,B_heavy_coord,B_heavy
 			for h_ind in A_hydr_list[key[0]]:
 				ang=get_D_H_A(A_heavy_coord[key[0]],A_hydr_coord[h_ind],B_heavy_coord[key[1]])
 				if(ang>(180-D_H_A_ang_thresh)):
-					hbond_list.append((A_heavy_indices[key[0]],B_heavy_indices[key[1]],'D',dok_dist.get(key),ang))
+					hbond_list.append((A_heavy_indices[key[0]],B_heavy_indices[key[1]],dok_dist.get(key),ang,'D-A'))
 
 		#suppose atom a with idex key[0] is A, and b with index key[1] is D
 		#let's loop through hydrogens of b
@@ -192,7 +191,7 @@ def find_hbonds(A_heavy_coord,A_heavy_indices,A_hydr_coord,B_heavy_coord,B_heavy
 			for h_ind in B_hydr_list[key[1]]:
 				ang=get_D_H_A(B_heavy_coord[key[1]],B_hydr_coord[h_ind],A_heavy_coord[key[0]])
 				if(ang>(180-D_H_A_ang_thresh)):
-					hbond_list.append((A_heavy_indices[key[0]],B_heavy_indices[key[1]],'A',dok_dist.get(key),ang))
+					hbond_list.append((A_heavy_indices[key[0]],B_heavy_indices[key[1]],dok_dist.get(key),ang,'A-D'))
 
 
 	return hbond_list
@@ -356,7 +355,42 @@ def find_ionmed_bonds(A_coordinates,A_indices,B_coordinates,B_indices,ION_coordi
 
 	return ion_med_list
 
+DEFAULT_ACCEPTORS={'CHARMM27': ('OC2',
+  'O',
+  'OD1',
+  'OW',
+  'ND1',
+  'SD',
+  'OG',
+  'OH',
+  'SG',
+  'NE2',
+  'OC1',
+  'OE1',
+  'OE2',
+  'OH2',
+  'OG1',
+  'OD2'),
+ 'GLYCAM06': ('O', 'OW', 'SM', 'N', 'NT', 'OH', 'O2', 'OS', 'OY'),
+ 'other': ()}
 
+DEFAULT_DONORS={'CHARMM27': ('NZ',
+  'OW',
+  'NE1',
+  'NH2',
+  'ND1',
+  'OG',
+  'NH1',
+  'N',
+  'OH',
+  'SG',
+  'NE',
+  'NE2',
+  'ND2',
+  'OH2',
+  'OG1'),
+ 'GLYCAM06': ('OW', 'N', 'NT', 'OH', 'N3'),
+ 'other': ()}
 
 
 
